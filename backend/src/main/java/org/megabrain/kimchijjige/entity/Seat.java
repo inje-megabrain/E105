@@ -2,6 +2,7 @@ package org.megabrain.kimchijjige.entity;
 
 import lombok.*;
 import org.megabrain.kimchijjige.constant.SeatStatus;
+import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,4 +27,14 @@ public class Seat {
 
     @Enumerated(EnumType.STRING) //Enum인지 알려주는것 -> 타입은 문자열
     private SeatStatus status;
+
+    public static Seat of(SeatAddRequestDto dto) {
+        Seat seat = Seat.builder()
+                .position(dto.getPosition())
+                .team(dto.getTeam())
+                .status(SeatStatus.ASSIGN)
+                .createdTime(LocalDateTime.now())
+                .build();
+        return seat;
+    }
 }

@@ -1,6 +1,7 @@
 package org.megabrain.kimchijjige.service;
 
 import org.megabrain.kimchijjige.constant.SeatStatus;
+import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
 import org.megabrain.kimchijjige.entity.Seat;
 import org.megabrain.kimchijjige.repository.SeatRepository;
 import org.springframework.stereotype.Service;
@@ -19,16 +20,14 @@ public class SeatService {
     }
 
     public List<Seat> allSeat(){
-        Seat seat1 = Seat.builder()
-                .createdTime(LocalDateTime.now())
-                .position("A1")
-                .status(SeatStatus.ASSIGN)
-                .team("Dotgabit")
-                .build();
-        seatRepository.save(seat1);
 
         List<Seat> seats = seatRepository.findAll();
 
         return seats;
+    }
+
+    public void addSeat(SeatAddRequestDto dto){
+        Seat seat = Seat.of(dto);
+        seatRepository.save(seat);
     }
 }

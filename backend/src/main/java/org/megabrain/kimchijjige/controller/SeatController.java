@@ -1,13 +1,12 @@
 package org.megabrain.kimchijjige.controller;
 
+import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
 import org.megabrain.kimchijjige.entity.Seat;
 import org.megabrain.kimchijjige.service.SeatService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +27,14 @@ public class SeatController {
 
         return new ResponseEntity<>(seats, HttpStatus.OK );//데이터, 상태코드
     }
+
+    @PostMapping("/seat")
+    public @ResponseBody
+    ResponseEntity addSeat(@RequestBody SeatAddRequestDto requestDto) {
+        seatService.addSeat(requestDto);
+
+        return  new ResponseEntity("저장되었습니다", HttpStatus.OK);
+    }
+
+      
 }
