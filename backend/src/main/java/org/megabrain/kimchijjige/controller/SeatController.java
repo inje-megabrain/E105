@@ -1,7 +1,10 @@
 package org.megabrain.kimchijjige.controller;
 
+import org.apache.coyote.Response;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
+import org.megabrain.kimchijjige.dto.SeatUpdateRequestDto;
 import org.megabrain.kimchijjige.entity.Seat;
+import org.megabrain.kimchijjige.exception.DuplicateSeatException;
 import org.megabrain.kimchijjige.service.SeatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +48,18 @@ public class SeatController {
             return new ResponseEntity("해당 " + id + "는 존재하지 않습니다", HttpStatus.BAD_REQUEST);
         }
         return  new ResponseEntity(seats, HttpStatus.OK );
+    }
+
+    @PutMapping("/seat/{id}")
+    public @ResponseBody
+    ResponseEntity putUpdateSeat(@PathVariable("id") Long id, @RequestBody SeatUpdateRequestDto requestDto){
+        try {
+            seatService.update(id, requestDto);
+        } catch (DuplicateSeatException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity("수정되었습니다", HttpStatus.OK);
     }
 
 }

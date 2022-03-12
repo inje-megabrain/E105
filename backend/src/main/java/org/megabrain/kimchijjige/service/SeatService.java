@@ -2,7 +2,9 @@ package org.megabrain.kimchijjige.service;
 
 import lombok.RequiredArgsConstructor;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
+import org.megabrain.kimchijjige.dto.SeatUpdateRequestDto;
 import org.megabrain.kimchijjige.entity.Seat;
+import org.megabrain.kimchijjige.exception.DuplicateSeatException;
 import org.megabrain.kimchijjige.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +46,19 @@ public class SeatService {
         }
         return savedSeat.get();
     }
+
+    @Transactional
+    public Long update(Long id, SeatUpdateRequestDto requestDto) {
+        Seat seat = validateDuplicateSeat(id);
+        seat.update(requestDto.getPosition(), requestDto.getTeam());
+        seatRepository.save(seat);
+        return id;
+    }
+
+    private Seat validateDuplicateSeat(Long id) {
+        return seatRepository.findById(id)
+                .orElseThrow(() -> new DuplicateSeatException("해당 사용자가 없습니다 id = " + id));
+
+    }
+
 }

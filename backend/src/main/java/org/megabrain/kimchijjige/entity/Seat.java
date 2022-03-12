@@ -5,7 +5,6 @@ import org.megabrain.kimchijjige.constant.SeatStatus;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -36,5 +35,10 @@ public class Seat {
                 .createdTime(LocalDateTime.now())
                 .build();
         return seat;
+    }
+
+    public void update(String position, String team){
+        this.position = position;
+        this.team = team;
     }
 }
