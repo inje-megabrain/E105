@@ -88,5 +88,4 @@ public class SeatService {
         seat.delete();
         seatRepository.save(seat);
     }
-
 }
