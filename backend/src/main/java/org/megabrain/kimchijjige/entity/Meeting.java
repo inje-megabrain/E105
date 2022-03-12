@@ -51,5 +51,17 @@ public class Meeting {
         return meeting;
     }
 
+    public void update(MeetingDto dto) {
+        this.purpose = dto.getPurpose();
+        this.team = dto.getTeam();
+        this.usingPeople = dto.getUsingPeople();
+        this.startTime = dto.getStartTime();
+        this.endTime = dto.getEndTime();
+    }
+
+    public void delete(){
+        this.meetingStatus = MeetingStatus.DONE;
+    }
+
 
 }
