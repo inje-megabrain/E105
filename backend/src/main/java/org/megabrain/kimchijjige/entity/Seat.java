@@ -3,6 +3,7 @@ package org.megabrain.kimchijjige.entity;
 import lombok.*;
 import org.megabrain.kimchijjige.constant.SeatStatus;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
+import org.megabrain.kimchijjige.dto.SeatUpdateRequestDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,4 +42,9 @@ public class Seat {
         this.position = position;
         this.team = team;
     }
+
+    public void delete(){
+        this.status =SeatStatus.NON_ASSIGN;
+    }
+
 }

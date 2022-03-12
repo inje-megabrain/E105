@@ -26,14 +26,17 @@ public class SeatController {
     public @ResponseBody
     ResponseEntity getAllSeat(){
         List<Seat> seats = seatService.allSeat();
-
         return new ResponseEntity<>(seats, HttpStatus.OK );//데이터, 상태코드
     }
 
     @PostMapping("/seat")
     public @ResponseBody
     ResponseEntity addSeat(@RequestBody SeatAddRequestDto requestDto) {
-        seatService.addSeat(requestDto);
+        try {
+            seatService.addSeat(requestDto);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
         return  new ResponseEntity("저장되었습니다", HttpStatus.OK);
     }
@@ -55,6 +58,18 @@ public class SeatController {
     ResponseEntity putUpdateSeat(@PathVariable("id") Long id, @RequestBody SeatUpdateRequestDto requestDto){
         try {
             seatService.update(id, requestDto);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+ 
+        return new ResponseEntity("수정되었습니다", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/seat/{id}")
+    public @ResponseBody
+    ResponseEntity putUpdateSeat(@PathVariable("id") Long id){
+        try {
+            seatService.delete(id);
         } catch (DuplicateSeatException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
