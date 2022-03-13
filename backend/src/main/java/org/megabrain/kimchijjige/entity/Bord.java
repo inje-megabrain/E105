@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Bord {
 
     @Id
@@ -44,6 +43,11 @@ public class Bord {
                 .author(dto.getAuthor())
                 .build();
         return bord;
+    }
+    public void  update(String content, String title){
+        this.content = content;
+        this.title = title;
+        this.modifiedTime = LocalDateTime.now();
     }
 
 

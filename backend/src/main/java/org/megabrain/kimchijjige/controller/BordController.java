@@ -3,6 +3,7 @@ package org.megabrain.kimchijjige.controller;
 
 import org.megabrain.kimchijjige.dto.BordDto;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
+import org.megabrain.kimchijjige.dto.SeatUpdateRequestDto;
 import org.megabrain.kimchijjige.entity.Bord;
 import org.megabrain.kimchijjige.entity.Seat;
 import org.megabrain.kimchijjige.exception.DuplicateSeatException;
@@ -52,5 +53,18 @@ public class BordController {
 
         return new ResponseEntity("삭제되었습니다", HttpStatus.OK);
     }
+
+    @PutMapping("/bord/{id}")
+    public @ResponseBody
+    ResponseEntity putUpdateContent(@PathVariable("id") Long id, @RequestBody BordDto requestDto){
+        try {
+            bordService.update(id, requestDto);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity("수정되었습니다", HttpStatus.OK);
+    }
+
 
 }
