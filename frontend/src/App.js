@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { MoveToInbox, Mail } from '@mui/icons-material';
 import SeatTable from './pages/contents/SeatTable';
+import MeetingRoomReservation from "./pages/contents/MeetingRoomReservation";
 
 const drawerWidth = 240;
 
@@ -49,7 +50,7 @@ function App() {
             sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
         >
           <Toolbar />
-            <SeatTable />
+            <MeetingRoomReservation />
         </Box>
       </Box>
   );

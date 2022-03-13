@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 const getSeatInfo = async() => {
     let seatinfo;
     await axios
-        .get('http://192.168.0.7:8080/api/v1/seat', {
+        .get('http://192.168.0.6:8080/api/v1/seat', {
             headers: {
                 'Access-Control-Allow-Origin': "*",
             }
