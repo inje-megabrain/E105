@@ -5,14 +5,14 @@ import React, {useEffect, useState} from "react";
 const getSeatInfo = async() => {
     let seatinfo;
     await axios
-        .get('http://192.168.0.6:8080/api/v1/seat', {
+        .get('http://192.168.0.5:8080/api/v1/seat', {
             headers: {
                 'Access-Control-Allow-Origin': "*",
             }
         })
         .then((Response)=>{
             seatinfo = Response.data;
-            console.log(Response.data)
+            console.log(seatinfo)
         })
         .catch((Error)=>{console.log(Error)})
     return seatinfo;
@@ -40,7 +40,8 @@ function card(seat){
 }
 
 export default function SeatTable(){
-    let [info, changeinfo] = useState("");
+    const [info, changeinfo] = useState("");
+    const [isloading, loadingchange] = useState(true)
     useEffect(() => {
         changeinfo(getSeatInfo)
     }, [])
@@ -49,8 +50,10 @@ export default function SeatTable(){
         <>
             <Box padding={4}>
                 <Grid container spacing={2}>
-                    {['A1', 'A2', 'A3', 'A4'].map((seatinfo) => (
-                         <></>
+                    {info && info.map((seat) => (
+                         <div>
+                             <h1>{seat}</h1>
+                         </div>
                         )
                     )
                     }

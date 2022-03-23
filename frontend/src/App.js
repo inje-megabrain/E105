@@ -187,13 +187,7 @@ export default function App() {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
-                <Routes>
-                    <Route exact path="/" component={Board} />
-                    <Route path="/0" component={Board} />
-                    <Route path="/1" component={MeetingRoomReservation} />
-                    <Route path="/2" component={SeatTable} />
-                    <Route path="/3" component={IPTable} />
-                </Routes>
+                <SeatTable/>
             </Box>
         </Box>
     );

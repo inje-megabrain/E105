@@ -79,7 +79,7 @@ export default function MeetingRoomReservation(){
                         starTime: starttime.toISOString(),
                         endTime: endtime.toISOString(),
                     };
-                    axios.post('http://203.241.228.70:18080/api/v1/meeting', data, {
+                    axios.post('http://192.168.0.5:8080/api/v1/meeting', data, {
                         headers: {
                             'Access-Control-Allow-Origin': '*',
                         },
