@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.megabrain.kimchijjige.constant.Role;
+import org.megabrain.kimchijjige.dto.LoginDto;
 import org.megabrain.kimchijjige.dto.NewMemberDto;
 
 import javax.persistence.*;

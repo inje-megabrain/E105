@@ -5,7 +5,10 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.megabrain.kimchijjige.dto.LoginDto;
 import org.megabrain.kimchijjige.dto.NewMemberDto;
 import org.megabrain.kimchijjige.entity.Member;
+import org.megabrain.kimchijjige.repository.MemberRepository;
 import org.megabrain.kimchijjige.service.MemberService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
@@ -42,8 +46,16 @@ public class MemberController {
     @GetMapping("/login")
     public @ResponseBody
     ResponseEntity login(@RequestBody LoginDto loginDto) {
-        return new ResponseEntity("로그인", HttpStatus.OK);
+        try {
+            memberService.login(loginDto);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity("ID나 Password를 다시 확인하세요", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(loginDto.getEmail() + "님 환영합니다.", HttpStatus.OK);
     }
+
 
     @GetMapping("/member")
     public @ResponseBody
