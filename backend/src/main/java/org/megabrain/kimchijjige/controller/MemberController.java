@@ -5,6 +5,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.megabrain.kimchijjige.dto.LoginDto;
 import org.megabrain.kimchijjige.dto.NewMemberDto;
 import org.megabrain.kimchijjige.entity.Member;
+import org.megabrain.kimchijjige.exception.NotEqualsPasswordException;
 import org.megabrain.kimchijjige.repository.MemberRepository;
 import org.megabrain.kimchijjige.service.MemberService;
 import org.slf4j.Logger;
@@ -49,10 +50,8 @@ public class MemberController {
         String login;
         try {
             login = memberService.login(loginDto);
-        } catch (IllegalStateException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity("ID나 Password를 다시 확인하세요", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(login, HttpStatus.OK);
     }
