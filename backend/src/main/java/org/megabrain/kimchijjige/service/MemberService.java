@@ -33,15 +33,16 @@ public class MemberService {
     public String login(LoginDto loginDto) {
 
         Optional<Member> member =  memberRepository.findByEmail(loginDto.getEmail());
-        if(member.isEmpty()) {
+        member.orElseThrow(() -> { //member.isEmpty()
             throw new IllegalStateException("다시 확인하세요");
-        }
-        else if(member.isPresent()){
-            if(!member.get().getPassword().equals(loginDto.getPassword())) {
-                throw new NotEqualsPasswordException("비밀번호를 다시 확인하세요");
+        });
 
+        member.ifPresent((m) -> { //member.isPresent(member.get.getpassword()!= dto.getPassword)
+            if(!m.getPassword().equals(loginDto.getPassword())) {
+                throw new NotEqualsPasswordException("비밀번호를 다시 확인하세요");
             }
-        }
+        });
+
         return "Login 성공";
     }
 
