@@ -46,14 +46,15 @@ public class MemberController {
     @GetMapping("/login")
     public @ResponseBody
     ResponseEntity login(@RequestBody LoginDto loginDto) {
+        String login;
         try {
-            memberService.login(loginDto);
+            login = memberService.login(loginDto);
         } catch (IllegalStateException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity("ID나 Password를 다시 확인하세요", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(loginDto.getEmail() + "님 환영합니다.", HttpStatus.OK);
+        return new ResponseEntity(login, HttpStatus.OK);
     }
 
 

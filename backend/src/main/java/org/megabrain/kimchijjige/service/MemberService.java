@@ -1,21 +1,21 @@
 package org.megabrain.kimchijjige.service;
 
-import org.hibernate.NonUniqueResultException;
+import lombok.extern.slf4j.Slf4j;
 import org.megabrain.kimchijjige.dto.LoginDto;
 import org.megabrain.kimchijjige.dto.NewMemberDto;
 import org.megabrain.kimchijjige.entity.Member;
+import org.megabrain.kimchijjige.exception.NotEqualsPasswordException;
 import org.megabrain.kimchijjige.repository.MemberRepository;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.management.Query;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class MemberService {
+
+
 
     private final MemberRepository memberRepository;
 
@@ -30,20 +30,19 @@ public class MemberService {
     }
 
 
-    public void login(LoginDto loginDto) {
+    public String login(LoginDto loginDto) {
 
         Optional<Member> member =  memberRepository.findByEmail(loginDto.getEmail());
         if(member.isEmpty()) {
             throw new IllegalStateException("다시 확인하세요");
         }
         else if(member.isPresent()){
-            System.out.println(member.get().getPassword());
-            System.out.println(loginDto.getPassword());
             if(!member.get().getPassword().equals(loginDto.getPassword())) {
-                throw new DataIntegrityViolationException("비밀번호를 다시 확인하세요");
+                throw new NotEqualsPasswordException("비밀번호를 다시 확인하세요");
 
             }
         }
+        return "Login 성공";
     }
 
 
