@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.megabrain.kimchijjige.constant.Role;
 import org.megabrain.kimchijjige.dto.LoginDto;
 import org.megabrain.kimchijjige.dto.NewMemberDto;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 
@@ -44,7 +45,7 @@ public class Member {
                 .email(memberDto.getEmail())
                 .name(memberDto.getName())
                 .studentId(memberDto.getStudentId())
-                .password(memberDto.getPassword())
+                .password(new BCryptPasswordEncoder().encode(memberDto.getPassword()))
                 .role(Role.GUEST)
                 .team(memberDto.getTeam())
                 .build();

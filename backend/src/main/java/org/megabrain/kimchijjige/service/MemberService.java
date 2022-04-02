@@ -6,6 +6,7 @@ import org.megabrain.kimchijjige.dto.NewMemberDto;
 import org.megabrain.kimchijjige.entity.Member;
 import org.megabrain.kimchijjige.exception.NotEqualsPasswordException;
 import org.megabrain.kimchijjige.repository.MemberRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,18 +32,13 @@ public class MemberService {
 
 
     public String login(LoginDto loginDto) {
-
-        Optional<Member> member =  memberRepository.findByEmail(loginDto.getEmail());
-        member.orElseThrow(() -> { //member.isEmpty()
+        Member member =  memberRepository.findByEmail(loginDto.getEmail()).orElseThrow(() -> { //member.isEmpty()
             throw new IllegalStateException("다시 확인하세요");
         });
-
-        member.ifPresent((m) -> { //member.isPresent(member.get.getpassword()!= dto.getPassword)
-            if(!m.getPassword().equals(loginDto.getPassword())) {
-                throw new NotEqualsPasswordException("비밀번호를 다시 확인하세요");
-            }
-        });
-
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (!encoder.matches(loginDto.getPassword(), member.getPassword())) { // 암호화된 비밀번호 매칭
+            throw new IllegalStateException("비밀번호를 다시 확인하세요");
+        }
         return "Login 성공";
     }
 

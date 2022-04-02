@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -44,22 +47,37 @@ public class MemberController {
         return new ResponseEntity("회원가입 완료", HttpStatus.OK);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public @ResponseBody
-    ResponseEntity login(@RequestBody LoginDto loginDto) {
+    ResponseEntity login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
         String login;
+        Cookie cookie = null;
         try {
             login = memberService.login(loginDto);
+            cookie = new Cookie("memberId", loginDto.getEmail());
+            response.addCookie(cookie);
         } catch (RuntimeException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity(login, HttpStatus.OK);
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity logout(HttpServletResponse response) {
+        expiredCookie(response, "memberId");
+        return new ResponseEntity("로그아웃", HttpStatus.OK);
+    }
+
+    private void expiredCookie(HttpServletResponse response, String cookieName) {
+        Cookie cookie = new Cookie(cookieName, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
 
     @GetMapping("/member")
     public @ResponseBody
     ResponseEntity getAllMember() {
+
         List<Member> memberList;
         try {
             memberList = memberService.allMember();
