@@ -1,7 +1,5 @@
 package org.megabrain.kimchijjige.config;
 
-import org.megabrain.kimchijjige.auth.PrincipalDetail;
-import org.megabrain.kimchijjige.auth.PrincipalDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,11 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new PrincipalDetailService();
-    }
     @Bean
     public BCryptPasswordEncoder encodePassword() {  // 회원가입 시 비밀번호 암호화에 사용할 Encoder 빈 등록
         return new BCryptPasswordEncoder();

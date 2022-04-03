@@ -33,7 +33,7 @@ public class MemberService {
 
     public String login(LoginDto loginDto) {
         Member member =  memberRepository.findByEmail(loginDto.getEmail()).orElseThrow(() -> { //member.isEmpty()
-            throw new IllegalStateException("다시 확인하세요");
+            throw new IllegalStateException("Email을 다시 확인하세요");
         });
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (!encoder.matches(loginDto.getPassword(), member.getPassword())) { // 암호화된 비밀번호 매칭
