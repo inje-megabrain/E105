@@ -67,14 +67,14 @@ public class SeatController {
 
     @DeleteMapping("/seat/{id}")
     public @ResponseBody
-    ResponseEntity putUpdateSeat(@PathVariable("id") Long id){
+    ResponseEntity deleteSeat(@PathVariable("id") Long id){
         try {
             seatService.delete(id);
         } catch (DuplicateSeatException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity("수정되었습니다", HttpStatus.OK);
+        return new ResponseEntity("삭제되었습니다", HttpStatus.OK);
     }
 
 }

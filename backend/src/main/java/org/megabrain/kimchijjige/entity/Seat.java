@@ -2,6 +2,7 @@ package org.megabrain.kimchijjige.entity;
 
 import lombok.*;
 import org.megabrain.kimchijjige.constant.SeatStatus;
+import org.megabrain.kimchijjige.dto.BordDto;
 import org.megabrain.kimchijjige.dto.SeatAddRequestDto;
 import org.megabrain.kimchijjige.dto.SeatUpdateRequestDto;
 
@@ -37,6 +38,9 @@ public class Seat {
                 .build();
         return seat;
     }
+
+
+
 
     public void update(String position, String team){
         this.position = position;
