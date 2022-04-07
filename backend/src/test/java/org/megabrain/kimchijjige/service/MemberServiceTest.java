@@ -9,11 +9,13 @@ import org.megabrain.kimchijjige.exception.NotEqualsPasswordException;
 import org.megabrain.kimchijjige.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.*;
 
 
 @SpringBootTest
+@ActiveProfiles("test")
 class MemberServiceTest {
 
     @Autowired
