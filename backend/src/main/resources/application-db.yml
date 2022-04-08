@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://192.168.0.5:5432/e105
+    username: postgres
+    password: postgres
