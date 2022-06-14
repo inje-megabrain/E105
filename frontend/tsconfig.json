@@ -8,19 +8,19 @@
     "outDir": "dist",
     "baseUrl": "./",
     "moduleResolution": "node",
-    "inlineSourceMap": true,
-    "paths": { 
-      "@/*": ["src/*"], 
-      "@api/*": ["src/api/*"], 
-      "@hooks/*": ["src/hooks/*"], 
-      "@components/*": ["src/components/*"], 
-      "@styles/*": ["src/styles/*"], 
-      "@static/*": ["stc/static/*"], 
-      "@utils/*": ["src/utils/*"], 
-      "@types/*": ["src/types/*"], 
-      "@layouts/*": ["src/layouts/*"], 
-      "@pages/*": ["src/pages/*"],
-      }
+    "types": ["react/next", "react-dom/next"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@api/*": ["src/api/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"],
+      "@static/*": ["stc/static/*"],
+      "@utils/*": ["src/utils/*"],
+      "@types/*": ["src/types/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
