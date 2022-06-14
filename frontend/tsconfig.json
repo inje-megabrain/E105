@@ -8,7 +8,8 @@
     "outDir": "dist",
     "baseUrl": "./",
     "moduleResolution": "node",
-    "types": ["react/next", "react-dom/next"],
+    "resolveJsonModule": true,
+    "types": ["node", "react/next", "react-dom/next"],
     "paths": {
       "@/*": ["src/*"],
       "@api/*": ["src/api/*"],

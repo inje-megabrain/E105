@@ -1,5 +1,3 @@
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   env: {
     browser: true,
@@ -9,7 +7,6 @@ module.exports = {
     jest: true,
   },
   extends: [
-    '@jadru/eslint-config',
     'eslint:recommended',
     'airbnb',
     'plugin:prettier/recommended',
