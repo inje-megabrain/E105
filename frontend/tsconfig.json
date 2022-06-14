@@ -1,27 +1,27 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "noEmit": true,
-      "jsx": "react-jsx",
-      "types": ["react/next", "react-dom/next"]
-    },
-    "include": [
-      "src"
-    ]
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNext",
+    "jsx": "react",
+    "strict": false,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "inlineSourceMap": true,
+    "paths": { 
+      "@/*": ["src/*"], 
+      "@api/*": ["src/api/*"], 
+      "@hooks/*": ["src/hooks/*"], 
+      "@components/*": ["src/components/*"], 
+      "@styles/*": ["src/styles/*"], 
+      "@static/*": ["stc/static/*"], 
+      "@utils/*": ["src/utils/*"], 
+      "@types/*": ["src/types/*"], 
+      "@layouts/*": ["src/layouts/*"], 
+      "@pages/*": ["src/pages/*"],
+      }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
