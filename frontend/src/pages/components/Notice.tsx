@@ -5,6 +5,7 @@ export const Notice = () => {
     const data = ['a', 'b'];
     return(
         <>
+            <h1>공지사항</h1>
             <List>
                 {/* {data.map(({ primary, secondary, person }, index) => (
                 <ListItem button key={index + person}>
