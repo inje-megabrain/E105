@@ -3,7 +3,7 @@ import { Box, CssBaseline, BottomNavigation, BottomNavigationAction, Paper, AppB
 import { Info, Group, TableRestaurant, AccountCircle, LaptopMac } from '@mui/icons-material';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { MeetingTable } from './pages/components/MeetingTable';
-import { Notice } from './pages/components/Notice';
+import { Board } from './pages/components/Board';
 import { Login } from './pages/accounts/Login';
 import { NotFound } from './pages/components/NotFound';
 import { TablePosition } from './pages/components/TablePosition';
@@ -14,10 +14,8 @@ export default function App() {
   const navigate = useNavigate();
   
   const handleTabBarSelect = (event: React.SyntheticEvent, newValue: string) => {
-    if (newValue !== tabBarSelect){
-      navigate(newValue);
-      setTabBarSelect(newValue);
-    }
+    navigate(newValue);
+    setTabBarSelect(newValue);
   };
 
   return (
@@ -33,7 +31,7 @@ export default function App() {
       </AppBar>
       <Container maxWidth="sm">
       <Routes>
-        <Route path="/" element={<Notice />} />
+        <Route path="/" element={<Board />} />
         <Route path="/meetingtable/*" element={<MeetingTable />} />
         <Route path="/tablesetup/*" element={<TablePosition />} />
         <Route path="/account/*" element={<Login />} />
@@ -45,7 +43,7 @@ export default function App() {
           value={tabBarSelect}
           onChange={handleTabBarSelect}
         >
-          <BottomNavigationAction label="공지" value="/" icon={<Info />} />
+          <BottomNavigationAction label="게시판" value="/" icon={<Info />} />
           <BottomNavigationAction label="미팅 테이블 예약" value="/meetingtable" icon={<Group />} />
           <BottomNavigationAction label="자리 배치" value="/tablesetup" icon={<TableRestaurant />} />
           <BottomNavigationAction label="로그인" value="/account" icon={<AccountCircle />} />

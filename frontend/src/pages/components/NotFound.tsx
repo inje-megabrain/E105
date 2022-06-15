@@ -13,12 +13,13 @@ export const NotFound = () => {
       };
     
     return (
-      <><br/><br/>
+      <>
         <Lottie 
+          style={{justifyContent: 'center'}}
           source={require('src/animation/94905-404-not-found.json')}
           options={defaultOptions}
-          height={400}
-          width={400}
+          height={500}
+          width={500}
         />
       </>
     )
