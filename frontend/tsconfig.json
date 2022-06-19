@@ -1,28 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ESNEXT",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "jsx": "react",
-    "strict": false,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "baseUrl": "./",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "types": ["node", "react/next", "react-dom/next"],
-    "paths": {
-      "@/*": ["src/*"],
-      "@api/*": ["src/api/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"],
-      "@static/*": ["stc/static/*"],
-      "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@pages/*": ["src/pages/*"]
-    }
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

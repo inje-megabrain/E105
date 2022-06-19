@@ -1,27 +1,28 @@
 module.exports = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 13,
+    sourceType: "module",
+  },
+  plugins: ["react", "@typescript-eslint"],
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
   env: {
     browser: true,
-    commonjs: true,
-    amd: true,
-    node: true,
+    es2021: true,
   },
-  extends: [
-    'eslint:recommended',
-    'airbnb',
-    'plugin:prettier/recommended',
-    'react-app',
-    'react-app/jest',
-    'plugin:import/typescript',],
   rules: {
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-  },
-  settings: {
-    'import/resolver': {
-      node: {
-        "paths": ["src"],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-      'typescript': {},
-    },
+    "@typescript-eslint/interface-name-prefix": "on",
+    "@typescript-eslint/explicit-function-return-type": "on",
+    "@typescript-eslint/explicit-module-boundary-types": "on",
+    "@typescript-eslint/no-explicit-any": "on",
   },
 };
